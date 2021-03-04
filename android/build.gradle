@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()  
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.1'
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+([rootProject] + (rootProject.subprojects as List)).each { project ->
+    project.repositories {
+        maven { url "https://dl.bintray.com/pushe/preview" }
+        maven { url "https://developer.huawei.com/repo" }
+    }
+}
+
+repositories {
+    maven { url 'https://developer.huawei.com/repo/' }
+    jcenter()
+    google()
+}
+
+
+dependencies {
+    implementation('com.facebook.react:react-native:+')
+    implementation("co.pushe.plus:base:2.4.2-alpha06")
+    implementation("co.pushe.plus:inappmessaging:2.4.2-alpha06")
+    implementation("co.pushe.plus:hms:2.4.2-alpha06")
+}
+  
